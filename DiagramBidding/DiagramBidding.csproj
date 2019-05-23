@@ -131,6 +131,9 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DBContext.cs" />
+    <Compile Include="Models\HandbkTrade.cs" />
+    <Compile Include="Models\Member.cs" />
+    <Compile Include="Models\Tool.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
