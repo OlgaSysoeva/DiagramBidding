@@ -15,7 +15,7 @@ namespace DiagramBidding.Controllers
         public ActionResult Index()
         {
             IEnumerable<Tool> tools = db.Tools;
-            ViewBag.Books = tools;
+            ViewBag.Tools = tools;
             return View();
         }
         public ActionResult About()

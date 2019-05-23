@@ -29,3 +29,21 @@
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
+
+<div>
+    <h3>Валюты</h3>
+    <table>
+        <tr>
+            <td><p>Идентификатор</p></td>
+            <td><p>Валюта</p></td>
+            <td></td>
+        </tr>
+        @foreach (var b in ViewBag.Tools)
+        {
+            <tr>
+                <td><p>@b.Id</p></td>
+                <td><p>@b.Currency</p></td>
+            </tr>
+        }
+    </table>
+</div>

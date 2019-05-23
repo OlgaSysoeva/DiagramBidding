@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using DiagramBidding.Models;
+using System.Data.Entity;
 
 namespace DiagramBidding
 {
@@ -12,6 +14,7 @@ namespace DiagramBidding
     {
         protected void Application_Start()
         {
+            Database.SetInitializer(new DbInitializer());
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
