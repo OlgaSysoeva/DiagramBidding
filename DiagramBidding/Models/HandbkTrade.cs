@@ -12,7 +12,7 @@ namespace DiagramBidding.Models
         // ID валюты
         public int ToolId { get; set; }
         // цена
-        public float Price { get; set; }
+        public double Price { get; set; }
         // объем
         public int Size { get; set; }
         // время сделки
