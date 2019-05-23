@@ -31,5 +31,11 @@ namespace DiagramBidding.Controllers
 
             return View();
         }
+
+        public ActionResult Razor()
+        {
+            var trades = db.HandbkTrades.ToList();
+            return View(trades);
+        }
     }
 }
