@@ -1,16 +1,16 @@
 ﻿@model IEnumerable<DiagramBidding.Models.HandbkTrade>
+@{
+    ViewBag.Title = "Диаграмма Razor";
+}
+<h2>@ViewBag.Title.</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h3>График зависимости цены валюты от времени:</h3>
+
+
+<h3>Результаты сделок:</h3>
+
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Customer.Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Seller.Name)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.Tool.Currency)
         </th>
@@ -23,17 +23,20 @@
         <th>
             @Html.DisplayNameFor(model => model.Date)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Seller.Name)
+        </th>
+
+
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+    @foreach (var item in Model)
+    {
     <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Customer.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Seller.Name)
-        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Tool.Currency)
         </td>
@@ -47,11 +50,15 @@
             @Html.DisplayFor(modelItem => item.Date)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.Customer.Name)
         </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Seller.Name)
+        </td>
+
     </tr>
-}
+    }
 
 </table>
+
+
