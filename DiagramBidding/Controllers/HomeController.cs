@@ -37,5 +37,26 @@ namespace DiagramBidding.Controllers
             var trades = db.HandbkTrades.ToList();
             return View(trades);
         }
+
+        public ActionResult Ajax()
+        {
+            return View();
+        }
+
+        public JsonResult JsonTrades()
+        {
+            var jsondata = db.HandbkTrades
+                .Select(x => new
+                {
+                    Currency = x.Tool.Currency,
+                    Price = x.Price,
+                    Size = x.Size,
+                    Date = x.Date,
+                    Customer = x.Customer.Name,
+                    Seller = x.Seller.Name
+                })
+                .ToList();
+            return Json(jsondata, JsonRequestBehavior.AllowGet);
+        }
     }
 }

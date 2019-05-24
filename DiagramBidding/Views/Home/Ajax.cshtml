@@ -1,0 +1,42 @@
+﻿@{
+    ViewBag.Title = "Диаграмма Ajax";
+}
+<h2>@ViewBag.Title.</h2>
+
+<h3>График зависимости цены валюты от времени:</h3>
+
+
+<h3>Результаты сделок:</h3>
+
+<table id="Trades" class="table">
+    <tr>
+        <th>
+            Валюта
+        </th>
+        <th>
+            Цена
+        </th>
+        <th>
+            Количество
+        </th>
+        <th>
+            Дата
+        </th>
+        <th>
+            Покупатель
+        </th>
+        <th>
+            Продавец
+        </th>
+    </tr>
+
+</table>
+
+<script type="text/javascript">
+    function OnSuccess(data) {
+        var results = $('#results'); // получаем нужный элемент     
+        for (var i = 0; i < data.length; i++) {
+            results.append('<li>' + data[i].Name + '</li>'); // добавляем данные в список
+        }
+    }
+</script>
