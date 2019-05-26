@@ -33,10 +33,17 @@
 </table>
 
 <script type="text/javascript">
-    function OnSuccess(data) {
-        var results = $('#results'); // получаем нужный элемент     
-        for (var i = 0; i < data.length; i++) {
-            results.append('<li>' + data[i].Name + '</li>'); // добавляем данные в список
-        }
-    }
+    $(function () {
+        $.getJSON('JsonTrades', function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var date = new Date(parseInt(data[i].Date.substr(6)));
+                date = ('0' + date.getDate()).substr(-2, 2) + '.' +
+                    ('0' + (date.getMonth() + 1)).substr(-2, 2) + '.' + date.getFullYear() +
+                    ' ' + ('0' + date.getHours()).substr(-2, 2) + ':' + ('0' + date.getMinutes()).substr(-2, 2) + ':' + ('0' + date.getSeconds()).substr(-2, 2);
+                $('#Trades').append('<tr><td>' + data[i].Currency + '</td><td>' + data[i].Price +
+                    '</td><td>' + data[i].Size + '</td><td>' + date + '</td><td>' + data[i].Customer +
+                    '</td><td>' + data[i].Seller + '</td></tr>');
+            }
+        });
+    });
 </script>
