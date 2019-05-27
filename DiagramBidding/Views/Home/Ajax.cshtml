@@ -1,11 +1,58 @@
 ﻿@{
     ViewBag.Title = "Диаграмма Ajax";
 }
-<h2>@ViewBag.Title.</h2>
 
-<h3>График зависимости цены валюты от времени:</h3>
+<script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
+<script src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
 
+<h2>@ViewBag.Title</h2>
+<div class="jumbotron">
+    <p class="lead">График зависимости цены валюты от времени:</p>
+    <script>
+        window.onload = function () {
+            var dataLines = [];
+            var dataPoints = [];
+            var chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                theme: "light2",
+                title: {
+                    text: "Курсы валют"
+                },
+                axisY: {
+                    title: "Цена",
+                    titleFontSize: 24,
+                    includeZero: false
+                },
+                data: dataLines 
+            });
 
+            function addData(data) {
+                for (var i = 0; i < data.length; i++) {
+                    var points = [];
+                    for (var j = 0; j < data[i].price.length; j++) {
+                        points.push({
+                            x: new Date(parseInt(("" + data[i].date[j]).substr(6))),
+                            y: data[i].price[j]
+                        });
+                    }
+                    dataLines.push({
+                        type: "line",
+                        yValueFormatString: "#,###",
+                        xValueFormatString: "DD.MM.YYYY",
+                        dataPoints: points
+                    });
+                }
+                chart.render();
+
+            }
+
+            $.getJSON("/Home/ChartJSON", addData);
+
+        }
+    </script>
+    <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+
+</div>
 <h3>Результаты сделок:</h3>
 
 <table id="Trades" class="table">
