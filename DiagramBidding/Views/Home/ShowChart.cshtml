@@ -1,0 +1,18 @@
+﻿@{
+
+    var myChart = new Chart(width: 800, height: 400)
+        .AddTitle("Курсы валют")
+        .AddLegend("Валюта");
+
+    foreach (var item in ViewBag.currency)
+    {
+
+        myChart.AddSeries(
+        name: item.currency,
+        chartType: "Line",
+        xValue: item.date,
+        yValues: item.price);
+
+    }
+    myChart.Write();
+}
