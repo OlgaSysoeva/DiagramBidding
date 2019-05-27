@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Диаграмма Ajax";
+    ViewBag.Title = "График Ajax";
 }
 
 <script src="https://canvasjs.com/assets/script/jquery-1.11.1.min.js"></script>
@@ -13,14 +13,20 @@
             var dataLines = [];
             var dataPoints = [];
             var chart = new CanvasJS.Chart("chartContainer", {
+                zoomEnabled: true,
                 animationEnabled: true,
                 theme: "light2",
                 title: {
                     text: "Курсы валют"
                 },
+                axisX: {
+                    valueFormatString: "DD.MM.YYYY",
+                    labelAngle: -50
+                },
                 axisY: {
                     title: "Цена",
                     titleFontSize: 24,
+                    valueFormatString: "#.###",
                     includeZero: false
                 },
                 data: dataLines 
@@ -32,13 +38,15 @@
                     for (var j = 0; j < data[i].price.length; j++) {
                         points.push({
                             x: new Date(parseInt(("" + data[i].date[j]).substr(6))),
-                            y: data[i].price[j]
+                            y: data[i].price[j]                            
                         });
                     }
                     dataLines.push({
                         type: "line",
-                        yValueFormatString: "#,###",
-                        xValueFormatString: "DD.MM.YYYY",
+                        showInLegend: true,
+                        yValueFormatString: "#.###",
+                        xValueFormatString: "DD.MM.YYYY", 
+                        legendText: data[i].currency,
                         dataPoints: points
                     });
                 }
