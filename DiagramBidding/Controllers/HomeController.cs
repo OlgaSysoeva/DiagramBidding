@@ -4,12 +4,12 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using DiagramBidding.Models;
+using Highsoft.Web.Mvc.Charts;
 
 namespace DiagramBidding.Controllers
 {
     public class HomeController : Controller
     {
-        // создаем контекст данных
         DBContext db = new DBContext();
 
         public ActionResult Index()
@@ -18,27 +18,47 @@ namespace DiagramBidding.Controllers
             ViewBag.Tools = tools;
             return View();
         }
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
-
-            return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
-
+       
         public ActionResult Razor()
         {
-            var trades = db.HandbkTrades.ToList();
+            var trades = db.HandbkTrades.ToList();            
             return View(trades);
         }
 
-        public ActionResult Ajax()
+        public ActionResult ShowChart()
+        {
+            var currency = TradeCurrency();
+            ViewBag.currency = currency;
+            return View();
+        }
+
+        public ActionResult ChartJSON()
+        {
+            var currency = TradeCurrency();
+            return Json(currency, JsonRequestBehavior.AllowGet);
+        }
+
+        public List<LineChart> TradeCurrency()
+        {
+            var trades = db.HandbkTrades.ToList();
+            var dbcurrency = db.HandbkTrades
+                .GroupBy(x => x.Tool.Currency)
+                .Select(x => new
+                {
+                    Currency = x.Key
+                })
+                .ToList();
+            var currency = new List<LineChart>();
+            foreach (var item in dbcurrency)
+            {
+                var line = new LineChart();
+                line.FindTrades(item.Currency, trades);
+                currency.Add(line);
+            }
+            return currency;
+        }
+
+           public ActionResult Ajax()
         {
             return View();
         }
